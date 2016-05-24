@@ -1,0 +1,10 @@
+// UO-C (old)
+include spelskil;
+
+function void Q424(obj Q4XN, integer val)
+{
+  integer Q5D0 = getMaxArmorClass(Q4XN);
+  Q5D0 = Q5D0 + val;
+  integer Q5NC = setMaxArmorClass(this, Q5D0);
+  return;
+}

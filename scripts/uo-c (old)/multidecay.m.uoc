@@ -1,0 +1,13 @@
+// UO-C (old)
+include multistuff;
+
+scriptvar integer Q4H2;
+
+on decay(integer oldvalue, integer newvalue)
+{
+  obj Q5AK = getMultiSlaveId(this);
+  resetMultiCarriedDecay(Q5AK);
+  integer Q4H4 = 0x01;
+  intRet(Q4H4);
+  return(0x01);
+}

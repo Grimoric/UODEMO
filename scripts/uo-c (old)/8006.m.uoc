@@ -1,0 +1,21 @@
+// UO-C (old)
+include scrollbase;
+
+on objectloaded()
+{
+  Q41U(this);
+  return(0x01);
+}
+
+on creation()
+{
+  attachScript(this, "aprotect");
+  setObjVar(this, "isScroll", 0x00);
+  return(0x00);
+}
+
+on callback<0x48>()
+{
+  Q5QJ(this);
+  return(0x00);
+}

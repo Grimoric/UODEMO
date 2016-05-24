@@ -1,0 +1,52 @@
+// UO-C (old)
+include globals;
+
+scriptvar list Q641;
+
+on message<"towncrieradd">(obj sender, list args)
+{
+  obj it = args[0x00];
+  if(!isInList(Q641, it))
+  {
+    appendToList(Q641, it);
+  }
+  return(0x01);
+}
+
+on message<"towncrierremove">(obj sender, list args)
+{
+  obj it = args[0x00];
+  if(isInList(Q641, it))
+  {
+    removeSpecificItem(Q641, it);
+  }
+  return(0x01);
+}
+
+function void Q55I(string Q56W, list args)
+{
+  integer num = numInList(Q641);
+  for(integer i = 0x00; i < num; i ++)
+  {
+    obj it = Q641[i];
+    multiMessage(it, Q56W, args);
+  }
+  return;
+}
+
+on message<"towncrieraddmessage">(obj sender, list args)
+{
+  Q55I("towncrieraddmessage", args);
+  return(0x01);
+}
+
+on message<"towncrierremovemessage">(obj sender, list args)
+{
+  Q55I("towncrierremovemessage", args);
+  return(0x01);
+}
+
+on decay(integer oldvalue, integer newvalue)
+{
+  return(0x00);
+}

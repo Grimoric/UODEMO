@@ -1,0 +1,8 @@
+// UO-C (old)
+include globals;
+
+on enterrange<0x00>(obj target)
+{
+  bark(this, "success");
+  return(0x01);
+}

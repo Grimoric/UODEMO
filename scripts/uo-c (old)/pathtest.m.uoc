@@ -1,0 +1,49 @@
+// UO-C (old)
+on creation()
+{
+  disableBehaviors(this);
+  scriptvar integer Q485 = 0x00;
+  return(0x01);
+}
+
+on speech<"come">(obj speaker, string arg)
+{
+  location a = getLocation(speaker);
+  walkTo(this, a, 0x2A);
+  enableBehaviors(this);
+  return(0x00);
+}
+
+on speech<"stop">(obj speaker, string arg)
+{
+  disableBehaviors(this);
+  Q485 = 0x00;
+  return(0x00);
+}
+
+on speech<"start">(obj speaker, string arg)
+{
+  enableBehaviors(this);
+  Q485 = 0x01;
+  return(0x00);
+}
+
+on pathfound<0x2A>()
+{
+  bark(this, "I made it!");
+  if(!Q485)
+  {
+    disableBehaviors(this);
+  }
+  return(0x00);
+}
+
+on pathnotfound<0x2A>()
+{
+  bark(this, "hrmph, I failed.");
+  if(!Q485)
+  {
+    disableBehaviors(this);
+  }
+  return(0x00);
+}

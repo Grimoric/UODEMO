@@ -1,0 +1,42 @@
+// UO-C (old)
+include spelskil;
+
+scriptvar integer Q4N4;
+scriptvar integer Q66A;
+
+on creation()
+{
+  Q4N4 = 0x00 - 0x05;
+  Q66A = 0x05;
+  setObjVar(this, "lookAtText", "a magical wizard's hat");
+  return(0x01);
+}
+
+on objectloaded()
+{
+  Q4N4 = 0x00 - 0x05;
+  Q66A = 0x05;
+  return(0x01);
+}
+
+on equip(obj equippedon)
+{
+  for(integer s = 0x00; s < 0x02; s ++)
+  {
+    Q43H(equippedon, s, Q4N4);
+  }
+  Q43H(equippedon, 0x02, Q66A);
+  return(0x01);
+}
+
+on unequip(obj unequippedfrom)
+{
+  integer Q5NN = 0x00 - Q4N4;
+  integer Q5NP = 0x00 - Q66A;
+  for(integer s = 0x00; s < 0x02; s ++)
+  {
+    Q43H(unequippedfrom, s, Q5NN);
+  }
+  Q43H(unequippedfrom, 0x02, Q5NP);
+  return(0x01);
+}

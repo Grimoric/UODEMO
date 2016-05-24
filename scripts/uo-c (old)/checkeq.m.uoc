@@ -1,0 +1,36 @@
+// UO-C (old)
+include globals;
+
+on creation()
+{
+  systemMessage(this, "You can no longer wear some of your equipment.");
+  systemMessage(this, "It will be placed in your pack in a few mins.");
+  callBack(this, 0x012C, 0x61);
+  return(0x00);
+}
+
+on callback<0x61>()
+{
+  integer Q64J = 0x00;
+  for(integer i = 0x01; i < 0x1A; i ++)
+  {
+    obj item = getItemAtSlot(this, i);
+    if((item != NULL()))
+    {
+      if(isWeapon(item))
+      {
+        if(!canWield(this, item))
+        {
+          integer Q4Q1 = putObjContainer(item, getBackpack(this));
+          Q64J = 0x01;
+        }
+      }
+    }
+  }
+  if(Q64J)
+  {
+    systemMessage(this, "Some equipment has been moved to your backpack.");
+  }
+  detachScript(this, "checkeq");
+  return(0x00);
+}

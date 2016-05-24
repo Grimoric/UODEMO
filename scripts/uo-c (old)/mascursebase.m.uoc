@@ -1,0 +1,28 @@
+// UO-C (old)
+include allstatbase;
+
+function integer Q4KU(obj user, location place)
+{
+  integer Q5NC = 0x00;
+  list Q5HT;
+  getMobsInRange(Q5HT, place, 0x02);
+  integer Q527;
+  for(integer x = 0x00; x < numInList(Q5HT); x ++)
+  {
+    obj Q5HY = Q5HT[x];
+    if(Q50G(Q5HY))
+    {
+      if(!Q433(Q5HY))
+      {
+        if(Q4IT(user, Q5HY, 0x00, 0x00))
+        {
+          Q5NC = 0x01;
+        }
+      }
+    }
+  }
+  sfx(place, 0x01FB, 0x00);
+  Q5UK(user, NULL(), 0x02, 0x00);
+  Q5UQ(this);
+  return(Q5NC);
+}

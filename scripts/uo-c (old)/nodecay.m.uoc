@@ -1,0 +1,5 @@
+// UO-C (old)
+on decay(integer oldvalue, integer newvalue)
+{
+  return(0x00);
+}

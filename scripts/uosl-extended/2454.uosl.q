@@ -1,0 +1,2 @@
+// UOSL (enhanced)
+inherits fluidcontainer;

@@ -1,0 +1,37 @@
+// UO-C (old)
+on use(obj user)
+{
+  integer Q4FS = getX(getLocation(this));
+  integer Q4FT = getY(getLocation(this));
+  integer Q4FU = getZ(getLocation(this));
+  integer Q5CG = Q4FU + 0x01;
+  location Q5C0 = Q4FS, Q4FT, Q5CG;
+  location Q4N2 = 0x14AF, 0x0244, 0x00;
+  list Q5DQ;
+  if(!hasObjVar(this, "working"))
+  {
+    bark(this, "SOUND EFFECT");
+    callback(this, 0x05, 0x01);
+    integer Q64U = teleport(this, Q5C0);
+    messageToRange(Q4N2, 0x02, "unlocked", Q5DQ);
+    setObjVar(this, "working", 0x01);
+  }
+  return(0x01);
+}
+
+on callback<0x01>()
+{
+  integer Q4FS = getX(getLocation(this));
+  integer Q4FT = getY(getLocation(this));
+  integer Q4FU = getZ(getLocation(this));
+  integer Q5CG = Q4FU - 0x01;
+  location Q5C0 = Q4FS, Q4FT, Q5CG;
+  bark(this, "SOUND EFFECT");
+  bark(this, "returning");
+  if(hasObjVar(this, "working"))
+  {
+    removeObjVar(this, "working");
+  }
+  integer Q64U = teleport(this, Q5C0);
+  return(0x01);
+}

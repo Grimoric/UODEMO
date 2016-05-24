@@ -1,0 +1,28 @@
+// UO-C (old)
+include guildbase;
+
+function void Q4DQ()
+{
+  list args;
+  appendToList(args, getLocation(this));
+  multiMessageToLoc(getRelayLoc(this), "collect", args);
+  return;
+}
+
+on online()
+{
+  Q4DQ();
+  return(0x01);
+}
+
+on serverswitch()
+{
+  Q4DQ();
+  return(0x01);
+}
+
+on message<"requestCollection">(obj sender, list args)
+{
+  Q4DQ();
+  return(0x01);
+}

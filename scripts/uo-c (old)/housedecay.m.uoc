@@ -1,0 +1,15 @@
+// UO-C (old)
+include multidecay;
+
+on destroyed()
+{
+  Q4WS(this);
+  return(0x01);
+}
+
+on message<"vendordelete">(obj sender, list args)
+{
+  obj vendor = args[0x00];
+  Q4X2(this, vendor);
+  return(0x01);
+}

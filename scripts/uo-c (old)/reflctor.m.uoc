@@ -1,0 +1,8 @@
+// UO-C (old)
+include spelskil;
+
+on callback<0x16>()
+{
+  loseFatigue(this, 0x0A);
+  return(0x00);
+}

@@ -1,0 +1,55 @@
+// UO-C (old)
+include globals;
+
+function void Q434(obj Q61K, integer Q4NC, integer Q65M)
+{
+  switch(Q65M)
+  {
+  case 0x00:
+    setObjVar(Q61K, "poisonImmunity", 0x01);
+    if(Q4NC != 0x00)
+    {
+      callback(Q61K, Q4NC, 0x96);
+    }
+    ;
+    break;
+  case 0x01:
+    setObjVar(Q61K, "coldImmunity", 0x01);
+    if(Q4NC != 0x00)
+    {
+      callback(Q61K, Q4NC, 0x97);
+    }
+    ;
+    break;
+  case 0x02:
+    setObjVar(Q61K, "fireImmunity", 0x01);
+    if(Q4NC != 0x00)
+    {
+      callback(Q61K, Q4NC, 0x98);
+    }
+    ;
+    break;
+  default:
+    bark(Q61K, "Invalid immunity type.");
+    break;
+  }
+  return;
+}
+
+on callback<0x96>()
+{
+  removeObjVar(this, "poisonImmunity");
+  return(0x01);
+}
+
+on callback<0x97>()
+{
+  removeObjVar(this, "coldImmunity");
+  return(0x01);
+}
+
+on callback<0x98>()
+{
+  removeObjVar(this, "fireImmunity");
+  return(0x01);
+}

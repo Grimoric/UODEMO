@@ -1,0 +1,6 @@
+// UO-C (old)
+on objectloaded()
+{
+  detachScript(this, "shipradargump");
+  return(0x01);
+}

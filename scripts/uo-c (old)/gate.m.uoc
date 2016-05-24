@@ -1,0 +1,9 @@
+// UO-C (old)
+include spelskil;
+
+on enterrange<0x00>(obj target)
+{
+  integer Q5ZL;
+  Q5ZL = teleport(target, getObjVar(this, "destination"));
+  return(0x01);
+}

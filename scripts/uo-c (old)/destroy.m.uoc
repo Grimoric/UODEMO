@@ -1,0 +1,8 @@
+// UO-C (old)
+include spelskil;
+
+on callback<0x1E>()
+{
+  deleteObject(this);
+  return(0x00);
+}

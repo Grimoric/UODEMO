@@ -1,0 +1,33 @@
+// UO-C (old)
+include globals;
+
+scriptvar location Q4N2;
+scriptvar list Q5DQ;
+
+on creation()
+{
+  Q4N2 = 0x15C2, 0xC6, 0x00;
+  return(0x00);
+}
+
+on use(obj user)
+{
+  if(!hasObjVar(this, "doorSwitchWorking"))
+  {
+    setObjVar(this, "doorSwitchWorking", 0x01);
+    messageToRange(Q4N2, 0x01, "unlock", Q5DQ);
+    callback(this, 0x1E, 0x26);
+    return(0x01);
+  }
+  return(0x00);
+}
+
+on callback<0x26>()
+{
+  if(hasObjVar(this, "doorSwitchWorking"))
+  {
+    removeObjVar(this, "doorSwitchWorking");
+    messageToRange(Q4N2, 0x01, "lockup", Q5DQ);
+  }
+  return(0x00);
+}

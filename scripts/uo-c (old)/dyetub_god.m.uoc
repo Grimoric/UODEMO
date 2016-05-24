@@ -1,0 +1,23 @@
+// UO-C (old)
+include sndfx;
+
+on use(obj user)
+{
+  systemMessage(user, "Select the clothing to dye.");
+  targetObj(user, this);
+  return(0x00);
+}
+
+on targetobj(obj user, obj usedon)
+{
+  if(usedon == NULL())
+  {
+    return(0x00);
+  }
+  integer Q66P = getObjType(usedon);
+  integer Q61R = getHue(this);
+  location Q66R = getLocation(usedon);
+  sfx(Q66R, 0x023E, 0x00);
+  setHue(usedon, Q61R);
+  return(0x00);
+}

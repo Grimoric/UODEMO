@@ -1,0 +1,39 @@
+// UO-C (old)
+include globals;
+
+extern void Q4DB();
+extern integer Q4YA(obj , obj );
+
+function void Q4DB()
+{
+  removeObjVar(this, "trapLevel");
+  removeObjVar(this, "trapType");
+  return;
+}
+
+function integer Q4YA(obj user, obj this)
+{
+  integer locked = 0x00;
+  if(hasObjVar(this, "isLocked"))
+  {
+    locked = getObjVar(this, "isLocked");
+  }
+  return(locked);
+}
+
+on creation()
+{
+  setObjVar(this, "isTrap", 0x01);
+  return(0x00);
+}
+
+on use(obj user)
+{
+  list Q63G;
+  Q63G = user, this;
+  if(!hasObjVar(this, "disabled"))
+  {
+    message(this, "triggerTrap", Q63G);
+  }
+  return(0x01);
+}

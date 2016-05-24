@@ -1,0 +1,38 @@
+// UO-C (old)
+include spelskil;
+
+scriptvar integer Q5NQ;
+scriptvar obj Q57L;
+scriptvar obj Q57M;
+
+function integer Q4JO(obj user, obj usedon, integer Q5NM)
+{
+  integer Q5NC = 0x00;
+  if(Q50G(usedon))
+  {
+    location Q4VS = getLocation(user);
+    location there = getLocation(usedon);
+    faceHere(user, getDirectionInternal(Q4VS, there));
+    doMissile_Mob2Mob(user, usedon, 0x379F, 0x07, 0x00, 0x01);
+    sfx(Q4VS, 0x020A, 0x00);
+    Q57M = usedon;
+    Q57L = user;
+    callback(this, 0x01, 0x19);
+    Q5UK(user, usedon, 0x02, Q5NM);
+    Q5NQ = Q5NM;
+    Q5NC = 0x01;
+  }
+  Q5UR(this, Q5NC);
+  return(Q5NC);
+}
+
+on callback<0x19>()
+{
+  integer Q527 = Q429(this, Q57L, Q57M, 0x02, Q5NQ);
+  if(isValid(Q57M))
+  {
+    scriptTrig(Q57M, 0x01, Q57L);
+  }
+  Q5UQ(this);
+  return(0x00);
+}

@@ -1,0 +1,6 @@
+// UO-C (old)
+on creation()
+{
+  updatesOn();
+  return(0x00);
+}

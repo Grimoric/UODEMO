@@ -1,0 +1,10 @@
+// UO-C (old)
+on speech<"descr">(obj speaker, string arg)
+{
+  string desc;
+  location Q5M7;
+  location Q4VS = getLocation(speaker);
+  integer x = (getLocalizedDesc(desc, Q5M7, Q4VS, Q4VS));
+  bark(this, desc);
+  return(0x00);
+}

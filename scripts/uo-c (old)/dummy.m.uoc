@@ -1,0 +1,12 @@
+// UO-C (old)
+on objectloaded()
+{
+  attachScript(this, "masterdummy");
+  return(0x01);
+}
+
+on creation()
+{
+  attachScript(this, "masterdummy");
+  return(0x01);
+}

@@ -1,0 +1,79 @@
+// UO-C (old)
+include identify;
+
+scriptvar list Q5HU;
+
+extern void Q45W(obj Q4GA);
+extern integer Q4ZD(obj looker);
+
+on lookedat(obj looker)
+{
+  if(hasObjVar(this, "owner"))
+  {
+    obj Q4GA = getObjVar(this, "owner");
+    Q45W(Q4GA);
+  }
+  string name;
+  name = Q4RB(this);
+  if(hasObjVar(this, "beenIdentified"))
+  {
+    if(Q4ZD(looker) > 0x00)
+    {
+      string Q54S = getObjVar(this, "MagicItemName");
+      name = Q54S;
+      if(hasObjVar(this, "charges"))
+      {
+        integer charges = getObjVar(this, "charges");
+        if(charges > 0x00)
+        {
+          name = Q54S + "  charges: " + charges;
+        }
+      }
+    }
+  }
+  barkTo(this, looker, name);
+  return(0x00);
+}
+
+on creation()
+{
+  setObjVar(this, "lookAtText", Q4RB(this));
+  return(0x00);
+}
+
+function void Q45W(obj Q4GA)
+{
+  if(isInList(Q5HU, Q4GA))
+  {
+    for(integer Q623 = 0x00; Q623 < numInList(Q5HU); Q623 ++)
+    {
+      obj Q67B = Q5HU[Q623];
+      if(Q4GA == Q67B)
+      {
+        return;
+      }
+    }
+  }
+  else
+  {
+    appendToList(Q5HU, Q4GA);
+  }
+  if(numInList(Q5HU) > 0x04)
+  {
+    removeItem(Q5HU, 0x05);
+  }
+  return;
+}
+
+function integer Q4ZD(obj looker)
+{
+  for(integer Q623 = 0x00; Q623 < numInList(Q5HU); Q623 ++)
+  {
+    obj Q67B = Q5HU[Q623];
+    if(looker == Q67B)
+    {
+      return(0x01);
+    }
+  }
+  return(0x00);
+}

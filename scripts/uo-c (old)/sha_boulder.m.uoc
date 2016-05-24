@@ -1,0 +1,42 @@
+// UO-C (old)
+include globals;
+
+scriptvar integer Q59J;
+
+on creation()
+{
+  setType(this, 0x11B6);
+  Q59J = 0x01;
+  callback(this, 0x01, 0x24);
+  return(0x00);
+}
+
+on callback<0x24>()
+{
+  location Q59R = getLocation(this);
+  integer Q5A4 = getX(Q59R);
+  integer Q5A5 = getY(Q59R);
+  integer Q5A6 = getZ(Q59R);
+  integer Q5CE;
+  location toLocation;
+  if((Q59J == 0x01) && (Q5A4 < 0x1596))
+  {
+    Q5CE = Q5A4 + 0x01;
+  }
+  if(Q5A4 == 0x1596)
+  {
+    Q59J = 0x00;
+  }
+  if((Q59J == 0x00) && (Q5A4 > 0x1593))
+  {
+    Q5CE = Q5A4 - 0x01;
+  }
+  if(Q5A4 == 0x1593)
+  {
+    Q59J = 0x01;
+  }
+  toLocation = Q5CE, Q5A5, Q5A6;
+  integer Q4Q2 = teleport(this, toLocation);
+  callback(this, 0x01, 0x24);
+  return(0x00);
+}

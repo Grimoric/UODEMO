@@ -1,0 +1,5 @@
+// UO-C (old)
+on creation()
+{
+  return(0x01);
+}

@@ -1,0 +1,1 @@
+globalscripts = { magicitem hintupdater };

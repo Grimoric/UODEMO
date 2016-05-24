@@ -1,0 +1,10 @@
+// UO-C (old)
+include spelskil;
+
+on creation()
+{
+  integer Q4G7 = getWeaponMaxHP(this);
+  integer Q5BV = Q4G7 + 0x1E;
+  integer dummy = setWeaponMaxHP(this, Q5BV);
+  return(0x00);
+}

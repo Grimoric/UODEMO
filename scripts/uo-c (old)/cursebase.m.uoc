@@ -1,0 +1,8 @@
+// UO-C (old)
+include allstatbase;
+
+function integer Q4JE(obj user, obj usedon, integer Q5NM)
+{
+  integer Q5NC = Q4IT(user, usedon, 0x00, Q5NM);
+  return(Q5NC);
+}

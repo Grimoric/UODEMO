@@ -1,0 +1,8 @@
+// UO-C (old)
+include platemail;
+
+on creation()
+{
+  setObjVar(this, "plateMailCost", 0x02);
+  return(0x01);
+}

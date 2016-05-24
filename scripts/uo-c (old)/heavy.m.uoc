@@ -1,0 +1,6 @@
+// UO-C (old)
+on creation()
+{
+  overloadWeight(this, 0xFF);
+  return(0x01);
+}

@@ -1,0 +1,20 @@
+// UO-C (old)
+include globals;
+
+on creation()
+{
+  callback(this, 0x10, 0x5C);
+  return(0x00);
+}
+
+on callback<0x5C>()
+{
+  detachScript(this, "beingtamed");
+  return(0x00);
+}
+
+on washit(obj attacker, integer damamt)
+{
+  detachScript(this, "beingtamed");
+  return(0x01);
+}

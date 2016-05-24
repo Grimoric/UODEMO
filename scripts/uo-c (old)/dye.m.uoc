@@ -1,0 +1,77 @@
+// UO-C (old)
+include globals;
+
+scriptvar obj Q66O;
+
+function integer Q49X(obj it)
+{
+  integer Q66P = getObjType(it);
+  if(Q66P == 0x0FAB)
+  {
+    return(0x01);
+  }
+  return(0x00);
+}
+
+on creation()
+{
+  setObjVar(this, "usesLeft", 0x19);
+  return(0x01);
+}
+
+on use(obj user)
+{
+  Q66O = NULL();
+  systemMessage(user, "Select the dye tub to use the dyes on.");
+  targetObj(user, this);
+  return(0x00);
+}
+
+on targetobj(obj user, obj usedon)
+{
+  if(usedon == NULL())
+  {
+    return(0x00);
+  }
+  if(Q49X(usedon))
+  {
+    Q66O = usedon;
+    selectHue(user, this, 0x00, 0x0FAB);
+  }
+  else
+  {
+    Q66O = NULL();
+    systemMessage(user, "Use that on a dye tub.");
+  }
+  return(0x00);
+}
+
+on hueselected<0x00>(obj user, integer objhue)
+{
+  if(!Q49X(Q66O))
+  {
+    Q66O = NULL();
+    return(0x00);
+  }
+  if(objhue < 0x02)
+  {
+    objhue = 0x02;
+  }
+  if(objhue > 0x03E9)
+  {
+    objhue = 0x03E9;
+  }
+  setHue(Q66O, objhue);
+  Q66O = NULL();
+  integer usesLeft = getObjVar(this, "usesLeft");
+  if(usesLeft == 0x01)
+  {
+    systemMessage(user, "You used up the dye.");
+    deleteObject(this);
+  }
+  else
+  {
+    setObjVar(this, "usesLeft", usesLeft - 0x01);
+  }
+  return(0x00);
+}

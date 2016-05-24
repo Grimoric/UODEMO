@@ -1,0 +1,55 @@
+// UO-C (old)
+include spelskil;
+
+scriptvar integer Q5NQ;
+scriptvar obj Q57L;
+scriptvar obj Q57M;
+scriptvar integer Q57H;
+
+function integer Q4LB(obj user, obj usedon, integer Q5NM)
+{
+  integer Q5NC = 0x00;
+  if(Q50G(usedon))
+  {
+    integer damage;
+    location Q4VS = getLocation(user);
+    location there = getLocation(usedon);
+    faceHere(user, getDirectionInternal(Q4VS, there));
+    doMobAnimation(usedon, 0x374A, 0x0A, 0x0F, 0x00, 0x00);
+    sfx(there, 0x0213, 0x00);
+    integer Q4HB = (getIntelligence(user) - getIntelligence(usedon));
+    obj Q5A1 = usedon;
+    obj Q5A0 = user;
+    Q422(user, usedon, 0x00, Q5NM);
+    if(Q4HB <= 0x00)
+    {
+      Q4HB = (getIntelligence(usedon) - getIntelligence(user));
+      doMobAnimation(user, 0x374A, 0x0A, 0x0F, 0x00, 0x00);
+      Q5A1 = user;
+      Q5A0 = usedon;
+    }
+    damage = Q4HB / 0x04;
+    Q57M = Q5A1;
+    Q57H = damage;
+    Q57L = Q5A0;
+    callback(this, 0x01, 0x19);
+    Q5UK(user, usedon, 0x02, Q5NM);
+    Q5NQ = Q5NM;
+    Q5NC = 0x01;
+  }
+  else
+  {
+    bark(user, "This spell won't work on that!");
+    Q4RD(user);
+  }
+  Q5UR(this, Q5NC);
+  return(Q5NC);
+}
+
+on callback<0x19>()
+{
+  integer Q527 = Q428(this, Q57H, Q57L, Q57M, 0x08, Q5NQ);
+  scriptTrig(Q57M, 0x01, Q57L);
+  Q5UQ(this);
+  return(0x00);
+}

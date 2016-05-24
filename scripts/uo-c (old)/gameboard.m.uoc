@@ -1,0 +1,28 @@
+// UO-C (old)
+on use(obj user)
+{
+  if(containedBy(this) != NULL())
+  {
+    destroyContents(this);
+    return(0x00);
+  }
+  return(0x01);
+}
+
+on wasdropped(obj dropper)
+{
+  if(containedBy(this) != NULL())
+  {
+    destroyContents(this);
+  }
+  return(0x01);
+}
+
+on objectloaded()
+{
+  if(containedBy(this) != NULL())
+  {
+    destroyContents(this);
+  }
+  return(0x01);
+}

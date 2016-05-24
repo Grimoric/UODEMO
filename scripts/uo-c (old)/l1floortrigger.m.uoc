@@ -1,0 +1,90 @@
+// UO-C (old)
+scriptvar list Q5DQ;
+
+on enterrange<0x00>(obj target)
+{
+  location Q56T;
+  if(getX(getLocation(this)) == 0x143B)
+  {
+    if(getY(getLocation(this)) == 0x024C)
+    {
+      Q56T = 0x1430, 0x0248, 0x00;
+      messageToRange(Q56T, 0x01, "PPdisarm", Q5DQ);
+    }
+    if(getY(getLocation(this)) == 0x0249)
+    {
+      Q56T = 0x1435, 0x0257, 0x00;
+      messageToRange(Q56T, 0x0A, "FSdisarm", Q5DQ);
+    }
+  }
+  if(getX(getLocation(this)) == 0x1431)
+  {
+    if(getY(getLocation(this)) == 0x0249)
+    {
+      Q56T = 0x1430, 0x0257, 0x00;
+      messageToRange(Q56T, 0x01, "WTdisarm", Q5DQ);
+      messageToRange(getLocation(this), 0x02, "trapCheck", Q5DQ);
+    }
+    if(getY(getLocation(this)) == 0x024C)
+    {
+      Q56T = 0x1435, 0x0250, 0x04;
+      messageToRange(Q56T, 0x02, "WSdisarm", Q5DQ);
+    }
+  }
+  return(0x00);
+}
+
+on leaverange<0x00>(obj target)
+{
+  if(getX(getLocation(this)) == 0x143B)
+  {
+    if(getY(getLocation(this)) == 0x0249)
+    {
+      callback(this, 0x3C, 0x02);
+    }
+    if(getY(getLocation(this)) == 0x024C)
+    {
+      callback(this, 0x3C, 0x04);
+    }
+  }
+  if(getX(getLocation(this)) == 0x1431)
+  {
+    if(getY(getLocation(this)) == 0x0249)
+    {
+      callback(this, 0x3C, 0x01);
+    }
+    if(getY(getLocation(this)) == 0x024C)
+    {
+      callback(this, 0x3C, 0x03);
+    }
+  }
+  return(0x00);
+}
+
+on callback<0x01>()
+{
+  location Q56T = 0x1430, 0x0257, 0x00;
+  messageToRange(Q56T, 0x01, "WTreload", Q5DQ);
+  return(0x00);
+}
+
+on callback<0x02>()
+{
+  location Q56T = 0x1435, 0x0257, 0x00;
+  messageToRange(Q56T, 0x0A, "FSreload", Q5DQ);
+  return(0x00);
+}
+
+on callback<0x03>()
+{
+  location Q56T = 0x1435, 0x0250, 0x04;
+  messageToRange(Q56T, 0x02, "WSreload", Q5DQ);
+  return(0x00);
+}
+
+on callback<0x04>()
+{
+  location Q56T = 0x1430, 0x0248, 0x00;
+  messageToRange(Q56T, 0x01, "PPreload", Q5DQ);
+  return(0x00);
+}

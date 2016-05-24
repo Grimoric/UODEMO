@@ -1,0 +1,16 @@
+// UO-C (old)
+on use(obj user)
+{
+  list a = this, "wobble", "llama";
+  location b = getLocation(this);
+  bark(this, "sending this wobble llama oss list");
+  multiMessageToLoc(b, "flop", a);
+  return(0x01);
+}
+
+on message<"flop">(obj sender, list args)
+{
+  barkint(numInList(args));
+  printList(args);
+  return(0x01);
+}

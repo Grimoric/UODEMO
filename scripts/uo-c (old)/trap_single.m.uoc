@@ -1,0 +1,64 @@
+// UO-C (old)
+function integer Q64S(integer Q443, obj victim, integer Q673, integer Q674, integer Q675)
+{
+  integer damage;
+  obj Q67D = victim;
+  string Q65C = Q443;
+  bark(Q67D, Q65C);
+  if((Q443 == 0x01) || (Q443 == 0x02) || (Q443 == 0x03))
+  {
+    integer Q4I3 = Q673;
+    integer Q4I4 = Q674;
+    integer Q4I2 = Q675;
+    damage = Q4I2 * (dice(Q4I3, Q4I4));
+  }
+  if(Q443 == 0x01)
+  {
+    loseHP(Q67D, damage);
+    return(damage);
+  }
+  if(Q443 == 0x02)
+  {
+    integer Q43C = getCurMana(Q67D) - damage;
+    if(Q43C < 0x00)
+    {
+      setCurMana(Q67D, 0x00);
+    }
+    else
+    {
+      loseMana(Q67D, damage);
+    }
+    return(damage);
+  }
+  if(Q443 == 0x03)
+  {
+    bark(Q67D, "My move should be affected");
+    integer Q43J = getCurFatigue(Q67D) - damage;
+    if(Q43J < 0x00)
+    {
+      setCurFatigue(Q67D, 0x00);
+    }
+    else
+    {
+      loseFatigue(Q67D, damage);
+    }
+    return(damage);
+  }
+  if(Q443 == 0x04)
+  {
+    return(0x00);
+  }
+  if(Q443 == 0x05)
+  {
+    integer Q437 = Q673;
+    integer Q438 = Q674;
+    integer Q439 = Q675;
+    location Q648 = Q437, Q438, Q439;
+    if(!teleport(Q67D, Q648))
+    {
+      return(0x00);
+    }
+    return(0x01);
+  }
+  return(0x00);
+}

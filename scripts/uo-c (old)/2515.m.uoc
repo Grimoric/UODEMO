@@ -1,0 +1,15 @@
+// UO-C (old)
+include eat;
+
+on creation()
+{
+  setObjVar(this, "I_am_food", 0x01);
+  setObjVar(this, "satiety", 0x0A);
+  return(0x01);
+}
+
+on use(obj user)
+{
+  Q4NG(user, 0x00);
+  return(0x01);
+}

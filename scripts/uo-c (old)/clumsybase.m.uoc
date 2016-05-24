@@ -1,0 +1,8 @@
+// UO-C (old)
+include statbase;
+
+function integer Q4J7(obj user, obj usedon, integer Q5NM)
+{
+  integer Q5NC = Q4MA(user, usedon, 0x01, 0x00, Q5NM);
+  return(Q5NC);
+}

@@ -1,0 +1,2 @@
+// UOSL (native)
+inherits hairdye;

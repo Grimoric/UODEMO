@@ -1,0 +1,8 @@
+// UO-C (old)
+include potion;
+
+on creation()
+{
+  Q5VX = 0x01;
+  return(0x01);
+}

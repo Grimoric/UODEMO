@@ -1,0 +1,16 @@
+// UO-C (old)
+include globals;
+
+on creation()
+{
+  multiCompSetSendSlave(this, 0x01);
+  shortCallback(this, 0x01, 0x37);
+  return(0x01);
+}
+
+on callback<0x37>()
+{
+  integer Q5NC = teleport(this, getLocation(this));
+  detachScript(this, "multiupdate");
+  return(0x01);
+}

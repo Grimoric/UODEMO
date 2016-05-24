@@ -1,0 +1,8 @@
+// UO-C (old)
+include trap_single;
+
+on leaverange<0x00>(obj target)
+{
+  integer Q64U = Q64S(0x01, target, 0x00, 0x00, 0x00);
+  return(0x00);
+}

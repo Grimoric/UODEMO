@@ -1,0 +1,14 @@
+// UO-C (old)
+include shrine;
+
+on creation()
+{
+  Q5T1 = 0x00;
+  return(0x01);
+}
+
+on objectloaded()
+{
+  Q5T1 = 0x00;
+  return(0x01);
+}

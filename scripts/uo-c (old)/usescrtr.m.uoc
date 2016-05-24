@@ -1,0 +1,35 @@
+// UO-C (old)
+include summoncr;
+
+on creation()
+{
+  setObjVar(this, "magicItemModifier", 0x05);
+  shortcallback(this, 0x01, 0x2F);
+  return(0x00);
+}
+
+on callback<0x2F>()
+{
+  integer charges = (getObjVar(this, "charges")) / 0x18;
+  setObjVar(this, "charges", charges);
+  return(0x00);
+}
+
+on use(obj user)
+{
+  integer charges = getObjVar(this, "charges");
+  if(charges <= 0x00)
+  {
+    systemMessage(user, "This magic item is out of charges.");
+    return(0x00);
+  }
+  Q4MF(user);
+  charges = charges - 0x01;
+  setObjVar(this, "charges", charges);
+  returnResourcesToBank(this, 0x18, "magic");
+  if(charges <= 0x00)
+  {
+    systemMessage(user, "This magic item is out of charges.");
+  }
+  return(0x00);
+}

@@ -1,0 +1,40 @@
+// UO-C (old)
+include itemmanip;
+
+on enterrange<0x00>(obj target)
+{
+  integer Q62G = getZ(getLocation(this));
+  integer Q5YP = getZ(getLocation(target));
+  integer Q4HE = Q62G - Q5YP;
+  if((Q4HE > 0x10) || (Q4HE < (0x00 - 0x10)))
+  {
+    return(0x01);
+  }
+  if(hasObjVar(this, "dest"))
+  {
+    location destination = getObjVar(this, "dest");
+  }
+  else
+  {
+    bark(this, "No dest Object variable found.");
+    return(0x01);
+  }
+  if(isPlayer(target))
+  {
+    if(hasObjVar(this, "accessList"))
+    {
+      if(!isInObjVarListSet(this, "accessList", target))
+      {
+        if(!isEditing(target))
+        {
+          return(0x01);
+        }
+      }
+    }
+    Q5Z2(target, destination);
+    setLastValidTerrainLoc(target, destination);
+    integer r = teleport(target, destination);
+    return(!r);
+  }
+  return(0x01);
+}

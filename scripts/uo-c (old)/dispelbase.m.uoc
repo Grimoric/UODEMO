@@ -1,0 +1,33 @@
+// UO-C (old)
+include spelskil;
+
+function integer Q4JI(obj user, obj usedon)
+{
+  integer Q5NC = 0x00;
+  if((Q50G(usedon)) && (hasScript(usedon, "destcrea")))
+  {
+    location Q4VS = getLocation(user);
+    location there = getLocation(usedon);
+    integer Q47W;
+    integer Q44S = getSkillLevelReal(user, 0x19);
+    faceHere(user, getDirectionInternal(Q4VS, there));
+    Q47W = 0x00;
+    Q47W = getObjVar(usedon, "summonDifficulty");
+    integer Q4IA = Q47W;
+    integer success = testAndLearnSkill(user, 0x19, Q4IA, 0x28);
+    if(success > 0x00)
+    {
+      doLocAnimation(there, 0x3728, 0x08, 0x14, 0x00, 0x00);
+      sfx(there, 0x0201, 0x00);
+      deleteObject(usedon);
+      Q5NC = 0x01;
+    }
+    else
+    {
+      doMobAnimation(usedon, 0x3779, 0x0A, 0x14, 0x00, 0x00);
+      systemMessage(user, "The " + getName(usedon) + " resisted the attempt to dispel it!");
+    }
+  }
+  Q5UQ(this);
+  return(Q5NC);
+}

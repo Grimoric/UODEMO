@@ -1,0 +1,49 @@
+// UO-C (old)
+include shipplank;
+
+on creation()
+{
+  integer Q5NC = Q5S7(this, 0x00, "shiprightplank");
+  return(0x01);
+}
+
+on enterrange<0x00>(obj target)
+{
+  return(Q5S5(0x00, this, target));
+}
+
+on ooruse(obj user)
+{
+  if(isDead(user))
+  {
+    Q5RW(0x00, this, user);
+    return(0x00);
+  }
+  integer Q5NC = Q5SA(0x00, this, user);
+  if(!Q5S7(this, 0x00, "shiprightplank"))
+  {
+    Q5S6(getMultiSlaveId(this));
+  }
+  return(0x00);
+}
+
+on use(obj user)
+{
+  if(isDead(user))
+  {
+    Q5RW(0x00, this, user);
+    return(0x00);
+  }
+  integer Q5NC = Q5SA(0x00, this, user);
+  if(!Q5S7(this, 0x00, "shiprightplank"))
+  {
+    Q5S6(getMultiSlaveId(this));
+  }
+  return(0x01);
+}
+
+on multirecycle(integer oldtype, integer newtype)
+{
+  Q5RX(0x00, this, oldtype);
+  return(0x01);
+}

@@ -1,0 +1,230 @@
+// UO-C (old)
+include multistuff;
+
+scriptvar integer Q43W;
+scriptvar integer Q58A;
+scriptvar integer Q5NG;
+scriptvar integer Q65T;
+
+on creation()
+{
+  if(!Q58A)
+  {
+    Q43W = 0x03;
+    Q58A = 0x01;
+  }
+  return(0x01);
+}
+
+function void Q5RY(obj ship)
+{
+  list Q5J1;
+  getPlayersOnMulti(Q5J1, ship);
+  integer num = numInList(Q5J1);
+  for(integer Q4EJ = 0x00; Q4EJ < num; Q4EJ ++)
+  {
+    obj player = Q5J1[Q4EJ];
+    attachScript(player, "shipnakedhack");
+  }
+  return;
+}
+
+function integer Q5SO(obj Q5AK, integer Q4IE, integer Q58B)
+{
+  location location;
+  integer Q5NC;
+  location = getLocation(Q5AK);
+  for(integer Q5CS = Q58B; Q5CS > 0x00; Q5CS --)
+  {
+    moveDir(location, Q4IE);
+  }
+  Q5NC = moveMultiCheck(Q5AK, location, Q43W);
+  if(Q5NC <= 0x00)
+  {
+    integer Q5GH = (Q4IE + 0x04) % 0x08;
+    while((Q5NC <= 0x00) && (Q58B > 0x01))
+    {
+      Q58B --;
+      moveDir(location, Q5GH);
+      Q5NC = moveMultiCheck(Q5AK, location, Q43W);
+    }
+  }
+  return(Q5NC);
+}
+
+function integer Q5SM(obj ship, integer Q5M5)
+{
+  integer Q4FX = getObjVar(ship, "myshipdir");
+  return((((Q4FX * 0x02) + Q5M5) % 0x08));
+}
+
+function integer Q5SP(obj Q5AK, integer Q4IE, integer Q58B)
+{
+  return(Q5SO(Q5AK, Q5SM(Q5AK, Q4IE), Q58B));
+}
+
+function integer Q5SS(integer myshiptype, integer Q4IE)
+{
+  return(0x00 + (myshiptype * 0x04) + (Q4IE * 0x01));
+}
+
+function integer Q5SQ(obj Q5AK, integer Q4IE, integer Q4AG)
+{
+  string Q5N7;
+  integer myshiptype = getObjVar(Q5AK, "myshiptype");
+  integer Q5CT = 0x00 + (myshiptype * 0x04) + (Q4IE * 0x01);
+  integer Q5NC = recycleMultiCheckRotate(Q5AK, Q5CT, Q43W, Q4AG);
+  if(Q5NC > 0x00)
+  {
+    setObjVar(Q5AK, "myshipdir", Q4IE);
+  }
+  return(Q5NC);
+}
+
+function obj Q5SE(integer Q5SR, integer Q4ID, location place)
+{
+  Q5NG = (0x00 - 0x06);
+  integer Q5BF = 0x00;
+  Q5BF --;
+  integer Q59C = 0x00 + (Q5SR * 0x04) + (Q4ID * 0x01);
+  obj Q5AK = NULL();
+  if(areMobilesInMultiArea(Q59C, place))
+  {
+    Q5NG = (0x00 - 0x09);
+    return(NULL());
+  }
+  Q5AK = makeMultiInstCheck(place, Q59C, Q43W, 0x00, Q5NG, 0x00, Q5BF, Q5BF);
+  return(Q5AK);
+}
+
+function obj Q5SD(integer Q5SR, location place)
+{
+  obj ship;
+  integer Q4IE = 0x05;
+  ship = Q5SE(Q5SR, 0x00, place);
+  if(ship != NULL())
+  {
+    Q4IE = 0x00;
+  }
+  if(Q4IE != 0x05)
+  {
+    setObjVar(ship, "myshipdir", Q4IE);
+    setObjVar(ship, "myshiptype", Q5SR);
+    string Q5AS;
+    getCurrentTimeStr(Q5AS);
+    setObjVar(ship, "creationtime", Q5AS);
+  }
+  return(ship);
+}
+
+function integer Q5SN(obj Q62O)
+{
+  return(hasObjVar(Q62O, "shipcommand"));
+}
+
+function integer Q5SJ(obj ship)
+{
+  obj Q62O = getObjVar(ship, "myshiptillerman");
+  if(Q62O == NULL())
+  {
+    return(0x00);
+  }
+  return(Q5SN(Q62O));
+}
+
+function integer Q5S4(obj ship, integer Q5M5, obj Q62O)
+{
+  integer Q4ID = Q5SM(ship, Q5M5);
+  integer Q58G = getMultiType(ship);
+  location Q4OI;
+  location Q4OJ;
+  integer Q5NC = getMultiExtents(Q58G, Q4OI, Q4OJ);
+  integer Q44G = getX(Q4OJ) - getX(Q4OI) + 0x01;
+  integer Q44I = getY(Q4OJ) - getY(Q4OI) + 0x01;
+  location Q5CP = getLocation(ship);
+  integer Q5EE = 0x00;
+  integer Q5EF = 0x00;
+  switch(Q4ID)
+  {
+  case 0x00:
+  case 0x04:
+    Q5EF = Q44I;
+    break;
+  case 0x01:
+  case 0x03:
+  case 0x05:
+  case 0x07:
+    Q5EE = Q44G;
+    Q5EF = Q44I;
+    break;
+  case 0x02:
+  case 0x06:
+    Q5EE = Q44G;
+    break;
+  default:
+    Q5EE = Q44G;
+    Q5EF = Q44I;
+    break;
+  }
+  integer Q44F = 0x00;
+  integer Q44H = 0x00;
+  switch(Q4ID)
+  {
+  case 0x00:
+    Q44H = 0x00;
+    break;
+  case 0x01:
+    Q44F = 0x02;
+    Q44H = 0x00;
+    break;
+  case 0x02:
+    Q44F = 0x02;
+    break;
+  case 0x03:
+    Q44F = 0x02;
+    Q44H = 0x04;
+    break;
+  case 0x04:
+    Q44H = 0x04;
+    break;
+  case 0x05:
+    Q44F = 0x06;
+    Q44H = 0x04;
+    break;
+  case 0x06:
+    Q44F = 0x06;
+    break;
+  case 0x07:
+    Q44F = 0x06;
+    Q44H = 0x00;
+    break;
+  default:
+    break;
+  }
+  for(; Q5EE > 0x00; Q5EE --)
+  {
+    moveDir(Q5CP, Q44F);
+  }
+  for(; Q5EF > 0x00; Q5EF --)
+  {
+    moveDir(Q5CP, Q44H);
+  }
+  if(isInMap(Q5CP))
+  {
+    if(hasObjVar(Q62O, "oldshipcommand"))
+    {
+      removeObjVar(Q62O, "oldshipcommand");
+    }
+    integer Q5ND = moveMultiCheck(ship, Q5CP, Q43W);
+    Q65T = 0x01;
+    return(Q5ND);
+  }
+  Q5RY(ship);
+  return(moveMultiMapSwitch(ship, Q5CP, Q43W));
+}
+
+function integer Q5S0(integer Q65M)
+{
+  integer Q59C = 0x00 + (Q65M * 0x04);
+  return(getNumInMultiType(Q59C) * 0xDC);
+}

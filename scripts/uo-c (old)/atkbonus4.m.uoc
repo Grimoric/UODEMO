@@ -1,0 +1,8 @@
+// UO-C (old)
+include atkbonus;
+
+on creation()
+{
+  Q471 = 0xC8;
+  return(0x01);
+}

@@ -1,0 +1,31 @@
+// UO-C (old)
+on enterrange<0x00>(obj target)
+{
+  integer damage;
+  if(!hasObjVar(this, "disarmed"))
+  {
+    damage = dice(0x03, 0x05);
+    setCurHP(target, getCurHP(target) - damage);
+  }
+  return(0x00);
+}
+
+on message<"FSdisarm">(obj sender, list args)
+{
+  integer Q5DQ;
+  if(!hasObjVar(this, "disarmed"))
+  {
+    setObjVar(this, "disarmed", Q5DQ);
+  }
+  return(0x00);
+}
+
+on message<"FSreload">(obj sender, list args)
+{
+  integer Q5DQ;
+  if(!hasObjVar(this, "disarmed"))
+  {
+    setObjVar(this, "disarmed", Q5DQ);
+  }
+  return(0x00);
+}

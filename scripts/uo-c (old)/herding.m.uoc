@@ -1,0 +1,6 @@
+// UO-C (old)
+on use(obj user)
+{
+  systemMessage(this, "BUG");
+  return(0x00);
+}

@@ -1,0 +1,15 @@
+// UO-C (old)
+include spelskil;
+
+on callback<0x13>()
+{
+  if(hasObjVar(this, "defenseBonus"))
+  {
+    integer Q48Q = getObjVar(this, "defenseBonus");
+    integer Q5MX = getNaturalAC(this) - Q48Q;
+    setNaturalAC(this, Q5MX);
+    removeObjVar(this, "defenseBonus");
+  }
+  detachScript(this, "remprtct");
+  return(0x00);
+}

@@ -1,0 +1,6 @@
+// UO-C (old)
+on give(obj giver, obj givenobj)
+{
+  deleteObject(givenobj);
+  return(0x00);
+}

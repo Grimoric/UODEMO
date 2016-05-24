@@ -1,0 +1,27 @@
+// UO-C (old)
+include spelskil;
+
+function void Q65X()
+{
+  setDefaultReturn(0x01);
+  Q42D(this, 0x02, 0x00);
+  handleHealthGain(this);
+  return;
+}
+
+on message<"cancelmagic">(obj sender, list args)
+{
+  Q65X();
+  return(0x01);
+}
+
+on callback<0x6C>()
+{
+  Q65X();
+  return(0x01);
+}
+
+on ishealthy()
+{
+  return(0x00);
+}
