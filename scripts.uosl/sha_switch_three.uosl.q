@@ -1,0 +1,10 @@
+// UOSL (native)
+inherits globals;
+
+trigger use
+{
+  list Q5DQ;
+  loc trapLocation = 0x154C, 0xBB, 0x00;
+  messageToRange(trapLocation, 0x05, "reset", Q5DQ);
+  return(0x01);
+}
